@@ -28,7 +28,6 @@ import pages.ReferAndEarn;
 import utility.Common;
 import utility.GetPropertyValue;
 import utility.HtmlManager;
-//import utility.Report;
 
 public class HomePageLinksChecking {
 	static WebDriver driver;
@@ -60,7 +59,6 @@ public class HomePageLinksChecking {
 		driver.manage().deleteAllCookies();
 		driver.get(prop.getPropValue("baseUrl"));
 		if(!driver.getTitle().contains(prop.getPropValue("siteTitle"))) {
-//			super.logStatus("fail", "Title not matched!! check "+test.addScreenCapture(c.screenshot()));
 			test.log(LogStatus.FAIL, html.fail("Title not matched!! check ")+test.addScreenCapture(c.screenshot()));
 			System.exit(0);
 		}
@@ -72,9 +70,7 @@ public class HomePageLinksChecking {
 		}
 		catch(Exception ex) {	
 			test.log(LogStatus.FAIL, html.fail("Home page not opened!! check ")+test.addScreenCapture(c.screenshot()));
-//			super.logStatus("fail", "Home page not opened!! check "+test.addScreenCapture(c.screenshot()));
 		}
-//		super.logStatus("pass", "Site opened, check "+test.addScreenCapture(c.screenshot()));
 		test.log(LogStatus.PASS, html.pass("Site opened using browser \""+prop.getPropValue("browserName")+"\""));
 		//		c.minimizeBrowser();
 	}
@@ -87,7 +83,6 @@ public class HomePageLinksChecking {
 		Boolean logoPresent = hp.siteLogo.isDisplayed();
 		if(!logoPresent){
 			test.log(LogStatus.FAIL, html.fail("Logo not found!! check ")+test.addScreenCapture(c.screenshot()));
-//			super.logStatus("fail", "Logo not found!! check "+test.addScreenCapture(c.screenshot()));
 			Assert.fail("Logo not found!!");
 		}
 		test.log(LogStatus.PASS, html.pass("Logo found."));
@@ -96,11 +91,9 @@ public class HomePageLinksChecking {
 		try{
 			s.find(c.getImagesDir()+prop.getPropValue("siteLogo"));
 			test.log(LogStatus.PASS, html.pass("Logo image found."));
-//			super.logStatus("pass", "Logo image found!!");
 		}
 		catch(Exception e1){
 			test.log(LogStatus.FAIL, html.fail("Logo image not found!! check ")+test.addScreenCapture(c.screenshot()));
-//			super.logStatus("fail", "Logo image not found!! check "+test.addScreenCapture(c.screenshot()));
 			Assert.fail("Logo image not found!!");
 		}
 		
@@ -165,10 +158,8 @@ public class HomePageLinksChecking {
 		}
 		try {
 			wait.until(ExpectedConditions.visibilityOf(hp.flightsLink));
-//			super.logStatus("pass", "Home page opened successfully.");
 		}
 		catch(Exception ex) {
-//			super.logStatus("fail", ex.getMessage()+"\n"+test.addScreenCapture(c.screenshot()));
 			test.log(LogStatus.FAIL, html.fail(ex.getMessage())+"\n"+test.addScreenCapture(c.screenshot()));
 		}
 	}
@@ -191,12 +182,10 @@ public class HomePageLinksChecking {
 		Collections.sort(temp);
 		if(temp.equals(actual)) {
 			test.log(LogStatus.PASS, html.pass("Dropdown of from flght is in sorted order."));
-//			super.logStatus("pass", "Dropdown of from flght is in sorted order.");
 		}
 		else {
 			test.log(LogStatus.FAIL, html.fail("Dropdown of from flght is not in sorted order!!")+test.addScreenCapture(c.screenshot()));
 			Assert.fail();
-//			super.logStatus("fail", "Dropdown of from flght is not in sorted order!! check "+test.addScreenCapture(c.screenshot()));
 		}
 	}
 	
@@ -204,7 +193,6 @@ public class HomePageLinksChecking {
 	@AfterTest
 	public void teardown()
 	{
-//		super.closeReport();
 		report.endTest(test);
 		report.flush();
 		c.quit(driver);
